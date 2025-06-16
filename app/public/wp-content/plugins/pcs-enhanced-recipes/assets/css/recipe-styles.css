@@ -207,6 +207,89 @@
     }
 }
 
+/* Nutrition Facts Styles */
+.pcs-recipe-nutrition-facts {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    max-width: 400px;
+}
+
+.pcs-recipe-nutrition-facts h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    border-bottom: 8px solid #000;
+    padding-bottom: 0.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.pcs-nutrition-serving-info {
+    font-size: 0.9rem;
+    font-style: italic;
+    margin-bottom: 1rem;
+    text-align: right;
+}
+
+.pcs-nutrition-calories {
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    font-weight: bold;
+}
+
+.pcs-nutrition-divider {
+    border: none;
+    height: 4px;
+    background-color: #000;
+    margin: 0.5rem 0 1rem;
+}
+
+.pcs-nutrition-macros {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.pcs-nutrition-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid #eee;
+    font-weight: 500;
+}
+
+.pcs-nutrition-sub-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.25rem 0;
+    padding-left: 1rem;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95rem;
+}
+
+.pcs-nutrition-label {
+    font-weight: inherit;
+}
+
+.pcs-nutrition-value {
+    font-weight: inherit;
+}
+
+.pcs-nutrition-disclaimer {
+    font-size: 0.8rem;
+    font-style: italic;
+    margin-top: 1rem;
+    color: #666;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .pcs-recipe-container {
@@ -225,5 +308,9 @@
     .pcs-recipe-meta {
         grid-template-columns: 1fr;
         gap: 1rem;
+    }
+    
+    .pcs-recipe-nutrition-facts {
+        max-width: 100%;
     }
 }

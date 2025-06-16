@@ -37,6 +37,9 @@ class PCS_Recipe_Template {
         // Add AJAX handlers for unit conversion
         add_action('wp_ajax_convert_recipe_units', array($this, 'convert_recipe_units'));
         add_action('wp_ajax_nopriv_convert_recipe_units', array($this, 'convert_recipe_units'));
+        
+        // Register recipe meta fields in REST API
+        add_action('rest_api_init', array($this, 'register_recipe_meta_in_rest'));
     }
     
     /**
@@ -56,6 +59,7 @@ class PCS_Recipe_Template {
      * Register recipe meta in REST API
      */
     public function register_recipe_meta_in_rest() {
+        // Basic recipe fields
         register_post_meta('recipe', '_pcs_prep_time', array(
             'show_in_rest' => true,
             'single' => true,
@@ -68,6 +72,12 @@ class PCS_Recipe_Template {
             'type' => 'string',
         ));
         
+        register_post_meta('recipe', '_pcs_total_time', array(
+            'show_in_rest' => true,
+            'single' => true,
+            'type' => 'string',
+        ));
+        
         register_post_meta('recipe', '_pcs_servings', array(
             'show_in_rest' => true,
             'single' => true,
@@ -75,6 +85,79 @@ class PCS_Recipe_Template {
         ));
         
         register_post_meta('recipe', '_pcs_ingredients', array(
+            'show_in_rest' => true,
+            'single' => true,
+            'type' => 'string',
+        ));
+        
+        register_post_meta('recipe', '_pcs_instructions', array(
+            'show_in_rest' => true,
+            'single' => true,
+            'type' => 'string',
+        ));
+        
+        register_post_meta('recipe', '_pcs_course', array(
+            'show_in_rest' => true,
+            'single' => true,
+            'type' => 'string',
+        ));
+        
+        register_post_meta('recipe', '_pcs_cuisine', array(
+            'show_in_rest' => true,
+            'single' => true,
+            'type' => 'string',
+        ));
+        
+        // Nutrition fields
+        register_post_meta('recipe', '_pcs_calories', array(
+            'show_in_rest' => true,
+            'single' => true,
+            'type' => 'string',
+        ));
+        
+        register_post_meta('recipe', '_pcs_protein', array(
+            'show_in_rest' => true,
+            'single' => true,
+            'type' => 'string',
+        ));
+        
+        register_post_meta('recipe', '_pcs_carbohydrates', array(
+            'show_in_rest' => true,
+            'single' => true,
+            'type' => 'string',
+        ));
+        
+        register_post_meta('recipe', '_pcs_fat', array(
+            'show_in_rest' => true,
+            'single' => true,
+            'type' => 'string',
+        ));
+        
+        register_post_meta('recipe', '_pcs_saturated_fat', array(
+            'show_in_rest' => true,
+            'single' => true,
+            'type' => 'string',
+        ));
+        
+        register_post_meta('recipe', '_pcs_cholesterol', array(
+            'show_in_rest' => true,
+            'single' => true,
+            'type' => 'string',
+        ));
+        
+        register_post_meta('recipe', '_pcs_sodium', array(
+            'show_in_rest' => true,
+            'single' => true,
+            'type' => 'string',
+        ));
+        
+        register_post_meta('recipe', '_pcs_fiber', array(
+            'show_in_rest' => true,
+            'single' => true,
+            'type' => 'string',
+        ));
+        
+        register_post_meta('recipe', '_pcs_sugar', array(
             'show_in_rest' => true,
             'single' => true,
             'type' => 'string',

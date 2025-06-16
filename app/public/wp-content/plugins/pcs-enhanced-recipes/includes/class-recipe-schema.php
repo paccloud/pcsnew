@@ -39,7 +39,17 @@ class PCS_Recipe_Schema {
         $cook_time = get_post_meta($post->ID, '_pcs_cook_time', true);
         $total_time = get_post_meta($post->ID, '_pcs_total_time', true);
         $servings = get_post_meta($post->ID, '_pcs_servings', true);
+        
+        // Get nutrition data
         $calories = get_post_meta($post->ID, '_pcs_calories', true);
+        $protein = get_post_meta($post->ID, '_pcs_protein', true);
+        $carbohydrates = get_post_meta($post->ID, '_pcs_carbohydrates', true);
+        $fat = get_post_meta($post->ID, '_pcs_fat', true);
+        $saturated_fat = get_post_meta($post->ID, '_pcs_saturated_fat', true);
+        $cholesterol = get_post_meta($post->ID, '_pcs_cholesterol', true);
+        $sodium = get_post_meta($post->ID, '_pcs_sodium', true);
+        $fiber = get_post_meta($post->ID, '_pcs_fiber', true);
+        $sugar = get_post_meta($post->ID, '_pcs_sugar', true);
         
         // Build schema
         $schema = array(
@@ -75,12 +85,58 @@ class PCS_Recipe_Schema {
             $schema['recipeYield'] = $servings . ' servings';
         }
         
-        // Add nutrition if calories are available
+        // Add nutrition information
+        $nutrition = array('@type' => 'NutritionInformation');
+        $has_nutrition = false;
+        
         if (!empty($calories)) {
-            $schema['nutrition'] = array(
-                '@type' => 'NutritionInformation',
-                'calories' => $calories . ' calories'
-            );
+            $nutrition['calories'] = $calories . ' calories';
+            $has_nutrition = true;
+        }
+        
+        if (!empty($protein)) {
+            $nutrition['proteinContent'] = $protein . ' g';
+            $has_nutrition = true;
+        }
+        
+        if (!empty($carbohydrates)) {
+            $nutrition['carbohydrateContent'] = $carbohydrates . ' g';
+            $has_nutrition = true;
+        }
+        
+        if (!empty($fat)) {
+            $nutrition['fatContent'] = $fat . ' g';
+            $has_nutrition = true;
+        }
+        
+        if (!empty($saturated_fat)) {
+            $nutrition['saturatedFatContent'] = $saturated_fat . ' g';
+            $has_nutrition = true;
+        }
+        
+        if (!empty($cholesterol)) {
+            $nutrition['cholesterolContent'] = $cholesterol . ' mg';
+            $has_nutrition = true;
+        }
+        
+        if (!empty($sodium)) {
+            $nutrition['sodiumContent'] = $sodium . ' mg';
+            $has_nutrition = true;
+        }
+        
+        if (!empty($fiber)) {
+            $nutrition['fiberContent'] = $fiber . ' g';
+            $has_nutrition = true;
+        }
+        
+        if (!empty($sugar)) {
+            $nutrition['sugarContent'] = $sugar . ' g';
+            $has_nutrition = true;
+        }
+        
+        // Only add nutrition to schema if we have at least one nutrition value
+        if ($has_nutrition) {
+            $schema['nutrition'] = $nutrition;
         }
         
         // Output schema

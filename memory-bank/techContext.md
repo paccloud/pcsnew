@@ -88,6 +88,24 @@
 - AJAX nonce verification
 - Proper escaping
 
+### Secrets Management (added 2025-06-16)
+To keep credentials out of version control while still accessible locally:
+1. Create `conf/local-secrets.env` (or `.env.local` at project root).
+2. Add the following keys (values reside only on your machine):
+   ```
+   WP_API_URL=http://pcsnew.local/
+   WP_API_USERNAME=cline
+   WP_API_PASSWORD=<application-password>
+   # Add any other API tokens here
+   ```
+3. The file path is already listed in `.gitignore`, so Git will ignore it.
+4. Reference in PHP or tooling via `getenv('WP_API_PASSWORD')` etc.
+
+- Data sanitization
+- XSS prevention
+- AJAX nonce verification
+- Proper escaping
+
 ### Accessibility
 - Semantic HTML
 - ARIA attributes

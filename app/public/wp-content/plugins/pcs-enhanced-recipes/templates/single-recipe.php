@@ -8,42 +8,42 @@
 // For block themes, we need a different approach to preserve the header and footer
 $is_block_theme = function_exists('wp_is_block_theme') && wp_is_block_theme();
 
-// Only include header/footer directly for classic themes
-if (!$is_block_theme) {
+// Output the correct header depending on theme type
+if ($is_block_theme && function_exists('get_block_template_html')) {
+    echo get_block_template_html('header');
+} else {
     get_header();
 }
 
-// Start output buffering to capture our content
-ob_start();
-
-while ( have_posts() ) :
+while (have_posts()) :
     the_post();
     
     // Get recipe meta
-    $prep_time = get_post_meta( get_the_ID(), '_pcs_prep_time', true );
-    $cook_time = get_post_meta( get_the_ID(), '_pcs_cook_time', true );
-    $total_time = get_post_meta( get_the_ID(), '_pcs_total_time', true );
-    $servings = get_post_meta( get_the_ID(), '_pcs_servings', true );
-    $calories = get_post_meta( get_the_ID(), '_pcs_calories', true );
-    $course = get_post_meta( get_the_ID(), '_pcs_course', true );
-    $cuisine = get_post_meta( get_the_ID(), '_pcs_cuisine', true );
-    $ingredients = get_post_meta( get_the_ID(), '_pcs_ingredients', true );
-    $instructions = get_post_meta( get_the_ID(), '_pcs_instructions', true );
+    $prep_time = get_post_meta(get_the_ID(), '_pcs_prep_time', true);
+    $cook_time = get_post_meta(get_the_ID(), '_pcs_cook_time', true);
+    $total_time = get_post_meta(get_the_ID(), '_pcs_total_time', true);
+    $servings = get_post_meta(get_the_ID(), '_pcs_servings', true);
+    
+    // Get nutrition data
+    $calories = get_post_meta(get_the_ID(), '_pcs_calories', true);
+    $protein = get_post_meta(get_the_ID(), '_pcs_protein', true);
+    $carbohydrates = get_post_meta(get_the_ID(), '_pcs_carbohydrates', true);
+    $fat = get_post_meta(get_the_ID(), '_pcs_fat', true);
+    $saturated_fat = get_post_meta(get_the_ID(), '_pcs_saturated_fat', true);
+    $cholesterol = get_post_meta(get_the_ID(), '_pcs_cholesterol', true);
+    $sodium = get_post_meta(get_the_ID(), '_pcs_sodium', true);
+    $fiber = get_post_meta(get_the_ID(), '_pcs_fiber', true);
+    $sugar = get_post_meta(get_the_ID(), '_pcs_sugar', true);
+    
+    $course = get_post_meta(get_the_ID(), '_pcs_course', true);
+    $cuisine = get_post_meta(get_the_ID(), '_pcs_cuisine', true);
+    $ingredients = get_post_meta(get_the_ID(), '_pcs_ingredients', true);
+    $instructions = get_post_meta(get_the_ID(), '_pcs_instructions', true);
 
     // Get author
-    $author = get_post_meta( get_the_ID(), '_pcs_author', true );
+    $author = get_post_meta(get_the_ID(), '_pcs_author', true);
     if (empty($author)) {
         $author = get_the_author();
-    }
-    
-    // Get the recipe content
-    $recipe_content = ob_get_clean();
-    
-    // Output the correct header depending on theme type
-    if ( $is_block_theme && function_exists( 'get_block_template_html' ) ) {
-        echo get_block_template_html( 'header' );
-    } else {
-        get_header();
     }
     ?>
     
@@ -172,6 +172,84 @@ while ( have_posts() ) :
                         </div>
                     </div>
                 </div>
+                
+                <?php if (!empty($protein) || !empty($carbohydrates) || !empty($fat) || !empty($saturated_fat) || !empty($cholesterol) || !empty($sodium) || !empty($fiber) || !empty($sugar)) : ?>
+                <div class="pcs-recipe-nutrition-facts">
+                    <h3><?php _e('Nutrition Facts', 'pcs-enhanced-recipes'); ?></h3>
+                    <p class="pcs-nutrition-serving-info"><?php _e('Amount per serving', 'pcs-enhanced-recipes'); ?></p>
+                    
+                    <div class="pcs-nutrition-main">
+                        <?php if (!empty($calories)) : ?>
+                        <div class="pcs-nutrition-calories">
+                            <span class="pcs-nutrition-label"><?php _e('Calories', 'pcs-enhanced-recipes'); ?></span>
+                            <span class="pcs-nutrition-value"><?php echo esc_html($calories); ?></span>
+                        </div>
+                        <?php endif; ?>
+                        
+                        <hr class="pcs-nutrition-divider">
+                        
+                        <div class="pcs-nutrition-macros">
+                            <?php if (!empty($fat)) : ?>
+                            <div class="pcs-nutrition-item">
+                                <span class="pcs-nutrition-label"><?php _e('Total Fat', 'pcs-enhanced-recipes'); ?></span>
+                                <span class="pcs-nutrition-value"><?php echo esc_html($fat); ?>g</span>
+                            </div>
+                            <?php endif; ?>
+                            
+                            <?php if (!empty($saturated_fat)) : ?>
+                            <div class="pcs-nutrition-sub-item">
+                                <span class="pcs-nutrition-label"><?php _e('Saturated Fat', 'pcs-enhanced-recipes'); ?></span>
+                                <span class="pcs-nutrition-value"><?php echo esc_html($saturated_fat); ?>g</span>
+                            </div>
+                            <?php endif; ?>
+                            
+                            <?php if (!empty($cholesterol)) : ?>
+                            <div class="pcs-nutrition-item">
+                                <span class="pcs-nutrition-label"><?php _e('Cholesterol', 'pcs-enhanced-recipes'); ?></span>
+                                <span class="pcs-nutrition-value"><?php echo esc_html($cholesterol); ?>mg</span>
+                            </div>
+                            <?php endif; ?>
+                            
+                            <?php if (!empty($sodium)) : ?>
+                            <div class="pcs-nutrition-item">
+                                <span class="pcs-nutrition-label"><?php _e('Sodium', 'pcs-enhanced-recipes'); ?></span>
+                                <span class="pcs-nutrition-value"><?php echo esc_html($sodium); ?>mg</span>
+                            </div>
+                            <?php endif; ?>
+                            
+                            <?php if (!empty($carbohydrates)) : ?>
+                            <div class="pcs-nutrition-item">
+                                <span class="pcs-nutrition-label"><?php _e('Total Carbohydrates', 'pcs-enhanced-recipes'); ?></span>
+                                <span class="pcs-nutrition-value"><?php echo esc_html($carbohydrates); ?>g</span>
+                            </div>
+                            <?php endif; ?>
+                            
+                            <?php if (!empty($fiber)) : ?>
+                            <div class="pcs-nutrition-sub-item">
+                                <span class="pcs-nutrition-label"><?php _e('Dietary Fiber', 'pcs-enhanced-recipes'); ?></span>
+                                <span class="pcs-nutrition-value"><?php echo esc_html($fiber); ?>g</span>
+                            </div>
+                            <?php endif; ?>
+                            
+                            <?php if (!empty($sugar)) : ?>
+                            <div class="pcs-nutrition-sub-item">
+                                <span class="pcs-nutrition-label"><?php _e('Sugars', 'pcs-enhanced-recipes'); ?></span>
+                                <span class="pcs-nutrition-value"><?php echo esc_html($sugar); ?>g</span>
+                            </div>
+                            <?php endif; ?>
+                            
+                            <?php if (!empty($protein)) : ?>
+                            <div class="pcs-nutrition-item">
+                                <span class="pcs-nutrition-label"><?php _e('Protein', 'pcs-enhanced-recipes'); ?></span>
+                                <span class="pcs-nutrition-value"><?php echo esc_html($protein); ?>g</span>
+                            </div>
+                            <?php endif; ?>
+                        </div>
+                        
+                        <p class="pcs-nutrition-disclaimer"><?php _e('* Percent Daily Values are based on a 2,000 calorie diet.', 'pcs-enhanced-recipes'); ?></p>
+                    </div>
+                </div>
+                <?php endif; ?>
             </div>
             
             <div class="pcs-recipe-content">
@@ -394,8 +472,8 @@ while ( have_posts() ) :
     
     <?php
     // Output the correct footer depending on theme type
-    if ( $is_block_theme && function_exists( 'get_block_template_html' ) ) {
-        echo get_block_template_html( 'footer' );
+    if ($is_block_theme && function_exists('get_block_template_html')) {
+        echo get_block_template_html('footer');
     } else {
         get_footer();
     }
