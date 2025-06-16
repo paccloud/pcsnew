@@ -1,17 +1,22 @@
 <?php
 /**
- * The template for displaying single recipe posts
- * Updated to use correct meta field keys from plugin
+ * Single Recipe Template – theme wrapper only.
+ * Loads full recipe markup from template-parts/recipe-content.php
  *
  * @package Pacific_Cloud_Seafood_25
  */
 
 get_header();
 
-/* Start the Loop */
-while ( have_posts() ) :
-	the_post();
-	?>
+if ( have_posts() ) {
+	while ( have_posts() ) {
+		the_post();
+		get_template_part( 'template-parts/recipe-content' );
+	}
+}
+
+get_footer();
+
 	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 		<div class="recipe-header">
 			<h1 class="entry-title"><?php the_title(); ?></h1>
@@ -157,8 +162,7 @@ while ( have_posts() ) :
 				<?php endif; ?>
 			</div>
 		<?php endif; ?>
-	</article>
-	<?php
+		<?php
 endwhile;
 
 get_footer();

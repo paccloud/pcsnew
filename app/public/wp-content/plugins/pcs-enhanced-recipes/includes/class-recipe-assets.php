@@ -69,14 +69,7 @@ class PCS_Recipe_Assets {
                     box-sizing: border-box;
                 }
                 
-                /* Override any potential header/layout conflicts */
-                body.single-recipe header,
-                body.single-recipe .wp-site-blocks > header,
-                body.single-recipe .wp-block-template-part {
-                    display: block !important;
-                    visibility: visible !important;
-                    position: relative !important;
-                }
+
             ";
             
             wp_add_inline_style('pcs-recipe-block-styles', $inline_css);

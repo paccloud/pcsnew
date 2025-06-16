@@ -123,6 +123,10 @@ class PCS_Recipe_Template {
      * Single recipe template (for both classic and block themes)
      */
     public function recipe_single_template($template) {
+        // If using a block theme, allow the regular template hierarchy (theme file or theme JSON) to render header/footer.
+        if ( $this->is_using_block_theme() ) {
+            return $template;
+        }
         if (is_singular('recipe')) {
             $custom_template = PCS_ER_PLUGIN_DIR . 'templates/single-recipe.php';
             if (file_exists($custom_template)) {
