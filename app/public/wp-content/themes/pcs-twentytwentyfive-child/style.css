@@ -1,0 +1,16 @@
+/*
+Theme Name: PCS Twenty Twenty-Five Child
+Theme URI: https://pacificcloudseafoods.com/
+Description: Child theme for PCS based on Twenty Twenty-Five
+Author: Ryan Horwath
+Template: twentytwentyfive
+Version: 0.1
+*/
+
+.pcs-recipe-archive-container {
+    max-width: 1140px; /* Or your preferred max width */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px; /* Optional: for some spacing on smaller screens */
+    padding-right: 15px; /* Optional: for some spacing on smaller screens */
+}

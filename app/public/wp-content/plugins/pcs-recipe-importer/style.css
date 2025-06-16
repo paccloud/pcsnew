@@ -1,0 +1,36 @@
+/**
+ * PCS Recipe Importer Styles
+ */
+
+.pcs-recipe-import-tabs .nav-tab-wrapper {
+    margin-bottom: 20px;
+}
+
+.pcs-recipe-import-tabs .tab-content {
+    display: none;
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+.pcs-recipe-import-tabs .tab-content.active {
+    display: block;
+}
+
+.pcs-recipe-import-tabs .form-field {
+    margin-bottom: 15px;
+}
+
+.pcs-recipe-import-tabs label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.pcs-recipe-import-tabs input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    width: 100%;
+    max-width: 400px;
+}

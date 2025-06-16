@@ -1,0 +1,12 @@
+{
+  "wordpress-mcp": {
+  "command": "npx",
+  "args": ["-y", "@automattic/mcp-wordpress-remote@latest"],
+  "env": {
+    "WP_API_URL":  "http://pcsnew.local/",
+    "WP_API_USERNAME": "cline",
+    "WP_API_PASSWORD": "GEYWPR5U@)uyJopm4rLXEO%v",
+    "LOG_FILE": "/Users/ryanhorwath/wordpress-mcp.log"
+  }
+}
+}

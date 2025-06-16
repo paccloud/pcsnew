@@ -1,0 +1,21 @@
+<?php
+/**
+ * BACKUP FILE - DO NOT USE
+ * This file was causing 502 errors due to undefined function block_template_part()
+ * The PCS Enhanced Recipes plugin handles the recipe archive template
+ */
+
+// Original content backed up for reference
+/*
+<?php
+echo "<!-- PCS_ARCHIVE_RECIPE_LOADED_TEST_VISIBLE -->";
+/**
+ * The template for displaying recipe archives
+ *
+ * @package PCS_Enhanced_Recipes
+ */
+// Exit if accessed directly.
+block_template_part( 'header' );
+?>
+... rest of original content ...
+*/

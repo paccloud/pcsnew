@@ -1,0 +1,213 @@
+{
+  "blogs": [
+    {
+      "id": "gid://shopify/Blog/64159056022",
+      "title": "News/Events",
+      "handle": "news",
+      "articles": [
+        {
+          "id": "gid://shopify/Article/390901235862",
+          "title": "Pacific Cloud Seafoods Announces Western New York Reopening",
+          "handle": "wny-re-opening",
+          "content": "After a three-year hiatus, we at Pacific Cloud Seafoods are thrilled to announce that we'll be reopening in our hometown! In 2004, we set out to bring quality seafood from Alaska to our family and friends right here in Western New York. And now, we'll be doing just that. Starting in August 2020, we're teaming up with small-scale, high-quality fisheries around North America to bring you the very best seafood. We're excited about the opportunity to inform, inspire, and educate Western New Yorkers about high-quality seafood and to connect you with values-based seafood suppliers. Sound interesting? Follow us here on the blog or find us on Facebook, Twitter, and Instagram for all the latest. Oh, and one last thing: We're launching a limited engagement in August at our seafood hub, located at 27 Chandler Street. Sign up below to be the first in line. We'll see you there!",
+          "publishedAt": "2020-08-07T19:15:41Z",
+          "tags": [
+            "Grand Opening in WNY"
+          ],
+          "image": "chandler.jpg"
+        },
+        {
+          "id": "gid://shopify/Article/555496800406",
+          "title": "The Buffalo News: \"Kolaches, Knish Among Unique-for-Buffalo Eats at Sunday Market\" (2020)",
+          "handle": "the-buffalo-news-august-2020",
+          "content": "Kolaches, Knish Among Unique-for-Buffalo Eats at Sunday Market The Buffalo News (August 2020) “The operation has given its small business participants such a boost that the Chandler Street Market might grow from an emergency measure to a fixture, stretching into the fall and possibly beyond.” Read more now.",
+          "publishedAt": "2020-08-25T18:30:00Z",
+          "tags": [],
+          "image": "Family_Photo_cropped_Mesa_de_trabajo_1.jpg"
+        },
+        {
+          "id": "gid://shopify/Article/555533598870",
+          "title": "Visit Buffalo Niagara: \"Pacific Cloud Brings Quality, Sustainable Seafood to Buffalo\" (2020)",
+          "handle": "pacific-cloud-brings-quality-sustainable-seafood-to-buffalo",
+          "content": "Interview with Visit Buffalo Niagara (November 2020) explaining our business ethos and what being a value-led business means for us: “[A Values-based company] refers, in my mind, to not being solely profit-driven. Our company needs to succeed in the current economic system. Still, we believe that we can do it in a way that offers harvesters a fair wage, increases our employees’ well-being and pays attention to the delicate balance of nature.” Read more here.",
+          "publishedAt": "2020-11-19T19:30:00Z",
+          "tags": [],
+          "image": "Visit_Buffalo_pic_Mesa_de_trabajo_1_e9334360-b7cc-49f8-8f9f-8700655419bd.png"
+        },
+        {
+          "id": "gid://shopify/Article/555533992086",
+          "title": "#WeGotGoals Podcast: \"How Ryan Horwath of Sitka Salmon Shares is Bringing Alaska to the Mainland\" (2019)",
+          "handle": "how-ryan-horwath-of-sitka-salmon-shares-is-bringing-alaska-to-the-mainland",
+          "content": "#WeGotGoals Podcast (November 2019) “Horwath knows a ton about the fishing industry and all the sustainability issues that are top-of-mind at the moment; he also serves as the Kodiak Fleet Manager and Western New York Coordinator, and yes, he fishes, too.” Listen to it here.",
+          "publishedAt": "2019-08-21T19:30:00Z",
+          "tags": [],
+          "image": "B_W_Ryan_Mesa_de_trabajo_1.jpg"
+        },
+        {
+          "id": "gid://shopify/Article/555534516374",
+          "title": "The Juneau Empire: \"Connecting People to Salmon in Alaska, the East Coast and the Midwest During COVID-19\" (2020)",
+          "handle": "connecting-people-to-salmon-in-alaska-the-east-coast-and-the-midwest-during-covid-19",
+          "content": "The Juneau Empire (May 2020) \"Some fast food restaurants in the Lower 48 have stopped serving hamburgers. Meatpacking plants have shut down. Grocery stores are frequently sold out of flour and rice. But Americans can buy Alaskan seafood directly from the fishermen who caught it — and, in increasing numbers, that’s what they’re doing..\" Read more here.",
+          "publishedAt": "2020-05-19T21:00:00Z",
+          "tags": [],
+          "image": "Blog_2020_Mesa_de_trabajo_1.jpg"
+        },
+        {
+          "id": "gid://shopify/Article/555534581910",
+          "title": "Alaska Public: \"Kodiak Jig Fishermen Explore Other Markets During Poor Cod Season\" (2018)",
+          "handle": "kodiak-jig-fishermen-explore-other-markets-during-poor-cod-season",
+          "content": "Alaska Public (April 2018) “Horwath says Sitka Salmon Shares is buying more rockfish out of Kodiak this year after a preliminary purchase in 2017. That’s good news for fishermen targeting rockfish. Horwath says Sitka Salmon Shares offers vessels around a dollar a pound for the fish, which is at least twice the profit Kodiak jig fishermen would usually make on rockfish, if not more.” Read more here.",
+          "publishedAt": "2018-04-18T21:30:00Z",
+          "tags": [
+            "Cod",
+            "Jig Fishing"
+          ],
+          "image": "Screen_Shot_2021-03-08_at_3.54.53_PM.png"
+        },
+        {
+          "id": "gid://shopify/Article/555534647446",
+          "title": "Graying of Alaska’s Fishing Fleet Puts Key Industry in Peril",
+          "handle": "graying-of-alaska-s-fishing-fleet-puts-key-industry-in-peril",
+          "content": "Oceans Deeply (March 2018) “With the average age of commercial fishers now over 50, the state is trying to figure out ways to break down barriers that are increasingly keeping young people from working the sea. Horwath believes that a sustainable sea-to-doorstep approach might be right for young fishers, and it could help ensure that a locally controlled industry survives to serve an important function in society. ‘I really think in the long term, people are going to want to eat fish,’ he said.” Read more: https://bit.ly/38BQpdi Photo by John Cannon",
+          "publishedAt": "2018-03-08T22:30:00Z",
+          "tags": [],
+          "image": "Boat_Blog_Photo_Mesa_de_trabajo_1_50850dec-8ce6-4fd1-9fd4-eed4c2c054de.jpg"
+        },
+        {
+          "id": "gid://shopify/Article/588936741092",
+          "title": "Trident Seafoods to stop buying salmon for most of Alaska Sept. 2nd",
+          "handle": "trident-seafoods-to-stop-buying-salmon-for-most-of-alaska-sept-2nd",
+          "content": "In an unprecedented move, north americas largest seafood company will stop buying salmon early this year. This comes as a suprise to many fishermen who invested in fishing gear, crew, insurance etc. and when the price is already low, they usually count on \"scratch fishing\" to pay the bills. This is a prime motivator for us here at pacific cloud. I have always believed we need to diversify and build our own markets. https://www.nationalfisherman.com/alaska/trident-says-chum-market-collapsed-will-stop-buying-most-alaska-salmon-sept-2",
+          "publishedAt": "2023-09-02T02:05:25Z",
+          "tags": [
+            "News",
+            "Salmon"
+          ],
+          "image": "above_Seiners.jpg"
+        }
+      ]
+    },
+    {
+      "id": "gid://shopify/Blog/85747237092",
+      "title": "Artisanal partners",
+      "handle": "artisanal-partners",
+      "articles": []
+    },
+    {
+      "id": "gid://shopify/Blog/86481305828",
+      "title": "Why Scale Matters",
+      "handle": "why-scale-matters",
+      "articles": []
+    },
+    {
+      "id": "gid://shopify/Blog/87466737892",
+      "title": "Health + Wellness + Cooking Tips",
+      "handle": "health-wellness",
+      "articles": [
+        {
+          "id": "gid://shopify/Article/587567857892",
+          "title": "Improve Your Mood with Seafood",
+          "handle": "improve",
+          "content": "What if there was a way to improve your mood and reduce symptoms of depression with food? Anxiety disorders are the most common mental illness in the United States, affecting 40 million adults or 18.1% of the entire population every year. Many of us look for alternative ways to treat the root of what’s ailing us. We know that food is medicine – that plant-based diets help our hearts, and turmeric helps our joints… but what about our mental health? Let’s talk about Omega-3 fatty acids: Omega-3 fatty acids have anti-inflammatory properties but also positively affect dopamine and serotonin levels in the brain, which are essential to regulating mood. Studies show that those who suffer from mood disorders and symptoms of depression may not have enough omega-3 eicosapentaenoic acid (EPA) or docosahexaenoic acid (DHA). The Harvard Health Blog sites over 30 clinical trials testing omega-3 preparations in people with depression. The studies reveal that omega-3 fatty acids are promising natural treatments for mood disorders. Your brain needs nutrients from food: Your brain needs omega-3 fatty acids for proper functioning. However, our bodies do not naturally produce omega-3s, and we must add them to our diet. Additionally, many people who do not consume nearly enough omega-3 fatty acids instead look to supplement their daily vitamin intake with omega-3 capsules. Instead of another daily supplement, add fun, new, delicious dishes to your weekly rotation! Day Boat Sea Scallops and Side-Stripe Shrimp are great, low-caloric sources of lean protein. A standard serving size for each would be about 3 oz, consumed three times a week. Important Nutrients: Scallops contain 333mg omegas, 50.4mg magnesium, zinc, and B12. Shrimp contain 267mg omegas, 33.2mg magnesium, zinc, and iron. Both zinc and magnesium are essential trace elements for anti-inflammation and brain function. Vitamin B12 may benefit your body in impressive ways, such as by boosting energy, improving memory, and helping to prevent heart disease. A staple, year-round freezer substitute for consuming omega-3 fatty acids would be salmon, especially if you are sensitive to shellfish. Cooking and Pairing Seafood Tips Shellfish pairs nicely with fresh, bright flavors like English peas, celery, spring onions, lemon, and fresh herbs. Simplicity is key – you want your shellfish to shine. Perfecting Scallops: For scallops, it's crucial to pat them dry and lay them out, so they are not touching. Salting them lightly on both sides and letting them hang out while you prep other ingredients will help draw out any moisture and give them that golden, crusty sear you’re looking for. Make sure you give scallops enough room when searing them. Use a large, heavy-bottomed pan and evenly spread heat or cook them in batches. Scallops will be ready to flip when cooked about halfway up and their slightly transparent flesh turns white. I like to sear scallops in healthy cooking oil, such as olive oil, with a touch of butter; it makes the sear and enhances the flavor of the scallops. Scallops can be served on their own with a puree and herb oil or pesto, or you can serve them with rice or couscous, perhaps a risotto! Endless Ways to Enjoy Shrimp: Shrimp should also have a nice sear. A high heat sauté seals in moisture and gives them beautiful color and texture. Depending on your preference, you can shell them or cook them with the shell on. Cooking with the shell on adds more flavor to broths and simmered dishes. Another key to mastering shrimp is the proper thawing process. The best way to defrost frozen shrimp is to put them in the refrigerator overnight or in a colander, running COLD water over them for 5-10 minutes. This will help you avoid rubbery shrimp. Never use the defrost setting on your microwave! When you are working with whole, wild-caught shrimp, you want to make sure you devein them and remove the digestive tract on the outside by carefully running a paring knife down the back of the shrimp. Shrimp are very versatile, and there are a million ways to use them. Shrimp is excellent in seafood pasta, risotto, stir-fries, and hot or cold salads. I love making fresh Vietnamese summer rolls or dicing them up and using them as a filling for dumplings. I use local, in-season vegetables in my cooking because they taste sweeter after having just been picked, and it is an excellent way to support our local economy. Imagine shrimp on a bed of sauteed leeks, garlic, and peas – accompanied by homemade potato gnocchi! Shop Local! Having a trusted local seafood supplier such as Pacific Cloud Seafoods makes obtaining a variety of in-season, wild-caught seafood a part of your weekly routine simple. You can find Pacific Cloud Seafoods at various farmer’s markets, and in our kitchen at 27 chandler street in the Buffalo community. You can also meet your local farmers and shop in season for your vegetables and other parts of your weekly meals! Meet our Nutrition Blogger and Expert: Galen Treger is an impassioned cook and Integrative Health Counselor who provides a holistic approach to physical and emotional wellness. Health begins with treating the whole person, not the disease or diagnosis. She teaches clients how to listen to their bodies to identify triggers while focusing on their goals. Galen provides treatment plans, food lists, and recipes to teach clients how to heal themselves and be a part of the way food and eating is viewed. Blog Resources Facts and Statistics, Anxiety & Depression Association of AmericaLink between food and mental health, American Psychological Association Omega-3 fatty acids for mood disorders, Harvard Health Blog",
+          "publishedAt": "2022-08-22T18:26:35Z",
+          "tags": [
+            "Health",
+            "Mood",
+            "Scallops",
+            "Wellness"
+          ],
+          "image": "1655212320_IMG_9863.jpg"
+        }
+      ]
+    },
+    {
+      "id": "gid://shopify/Blog/87467458788",
+      "title": "Seafood Recipes",
+      "handle": "seafood-recipes",
+      "articles": []
+    },
+    {
+      "id": "gid://shopify/Blog/89365086436",
+      "title": "Recipes",
+      "handle": "recipes",
+      "articles": [
+        {
+          "id": "gid://shopify/Article/588475465956",
+          "title": "Crispy Baked Lingcod and Chips",
+          "handle": "crispy-baked-lingcod-and-chips",
+          "content": "Ingredients 1 ¼ pound Lingcod 1 ½ cup panko crumbs 2 teaspoon dried thyme 1 teaspoon paprika ½ teaspoon salt ¼ teaspoon pepper 1 tablespoon olive oil 2 eggs ¼ cup Dijon mustard 1 ¼ cup flour Potatoes 2 large russet potatoes 1 tablespoons olive oil 1 garlic clove, minced salt and pepper Tarter Sauce 1 cup mayonnaise 4 tablespoons dill pickle, finely chopped 1 tablespoons capers, finely chopped 1 tablespoon fresh dill, finely chopped 1 teaspoon Worcestershire sauce ½ teaspoon Dijon mustard ½ lemon, juiced salt and pepper to taste Procedure Preheat oven to 425 Prepare two baking sheets with parchment paper, set aside. Roasted Potatoes (chips) Combine olive oil and minced garlic, set aside. Wash and dry potatoes. Cut into wedges. Place in a large bowl and toss with olive oil and garlic. Spread evenly on prepared baking sheet. Season with salt and pepper. Place on lower rack of oven. Roast for 30 minutes, flipping half way thru. Lingcod While potatoes are roasting, prepare fish. Cut fish into 3-inch pieces, and set aside In a medium-size bowl, combine the panko, dried thyme, paprika, salt, and pepper. Heat a skillet over medium low heat. Add the panko crumbs into the skillet and toast, stirring frequently for about 5 minutes or until golden brown. Remove from heat and stir in 1 tablespoon on oil. Transfer crumbs to a shallow bowl. In another shallow bowl, whisk together the eggs and Dijon mustard, set aside. In a third shallow bowl, put in the flour. Take each piece of fish, dredge in the flour, then completely coat in the Dijon mixture, then press fish in the panko crumbs. Ensure fish is completely coated in panko crumbs. Set the fish on the prepared baking sheet. Continue with the remaining fish. Once all fish is coated, bake in the oven for 15 minutes or until the fish is cooked thru. Time it to put the fish in the oven with the potatoes during the potatoes' last 15 minutes of roasting. Tarter Sauce Combine all ingredients. Cover and refrigerate until ready to use. Check out Chef Krisses Blog https://krissielee.com/",
+          "publishedAt": "2023-01-20T19:47:02Z",
+          "tags": [
+            "Lingcod",
+            "Recipes",
+            "Whitefish"
+          ],
+          "image": "Lingcod-crispy-2.jpg"
+        },
+        {
+          "id": "gid://shopify/Article/588647071972",
+          "title": "Sea Scallop Crudo, with Grapefruit, Cherry Tomato, Pickled Red Onion, and lemon vinaigrette",
+          "handle": "sea-scallop-crudo",
+          "content": "Recipe: Sea Scallop Crudo with Grapefruit, Cherry Tomato, Pickled Red Onion, and Lemon Vinaigrette Introduction: Sea Scallop Crudo is a refreshing and elegant dish that showcases the delicate flavors of fresh scallops. This raw preparation requires the scallops to be of the highest quality and freshness. Paired with vibrant grapefruit, juicy cherry tomatoes, tangy pickled red onion, and a zesty lemon vinaigrette, this recipe is a feast for the senses. Let's dive into the details! Ingredients: 6-8 large fresh sea scallops 1 ruby red grapefruit, separated into wedges (membrane and pith removed) 8 orange cherry tomatoes, halved 1/2 small red onion (sliced very thin) Nasturtium and carrot micro greens (optional) Juice of 1 fresh lemon Extra virgin olive oil Kosher salt and freshly ground black pepper For the vinaigrette: Lemon juice (from 1 fresh lemon) Extra virgin olive oil (to match the amount of lemon juice) Kosher salt and freshly ground black pepper Instructions: Ensure the scallops are as fresh as possible, preferably not more than 48 hours out of the ocean. Talk to your supplier to confirm the scallops' origin and harvest date. Choose day-boat scallops for the best quality. Prepare the vinaigrette: In a small bowl, combine the lemon juice, removing any seeds. Mix in enough olive oil to match the amount of lemon juice. Lightly season with salt and pepper. Add the thinly sliced red onion to the vinaigrette and set it aside for at least 20 minutes to marinate. Arrange the grapefruit wedges, halved cherry tomatoes, micro greens, and vinaigrette around your workstation for quick plating once the scallops are ready. Remove the scallops from the refrigerator. Work quickly to remove the side muscle (a small rectangular tag of flesh attached to the side of each scallop) and rinse the scallops in ice-cold water. Pat dry the scallops thoroughly with paper towels. Slice the scallops into disks about 1/4 inch thick. Depending on the size of the scallops, you should get 3-4 slices per scallop. On the serving plate, arrange the scallop slices in a staggered line with the grapefruit wedges and cherry tomatoes. Drizzle the lemon vinaigrette over the scallops, grapefruit, and tomatoes. Gently garnish with micro greens, such as nasturtium and carrot. This step is optional, and you can use other varieties of micro greens as well. Serve the Sea Scallop Crudo immediately for the freshest flavors and textures. Optionally, chill the plates before serving to help preserve the ingredients' freshness. Tip: For the best results, ensure all the ingredients are of the highest quality and freshness. Discuss with your supplier to obtain the freshest sea scallops, and handle them with care during preparation. Enjoy the exquisite combination of flavors in this Sea Scallop Crudo recipe, where the sweetness of scallops meets the tanginess of grapefruit and pickled red onion, all elevated by the zesty lemon vinaigrette. It's a culinary masterpiece that will impress your guests and tantalize their taste buds. Bon appétit!",
+          "publishedAt": "2023-05-27T01:38:16Z",
+          "tags": [
+            "Recipes",
+            "Scallops"
+          ],
+          "image": "Scallop_Crudo_B.jpg"
+        }
+      ]
+    },
+    {
+      "id": "gid://shopify/Blog/89520275684",
+      "title": "Alaskan Stories",
+      "handle": "alaskan-stories",
+      "articles": []
+    },
+    {
+      "id": "gid://shopify/Blog/89851330788",
+      "title": "Traceability",
+      "handle": "traceability",
+      "articles": [
+        {
+          "id": "gid://shopify/Article/588782469348",
+          "title": "Seafood industry resists push to reel in traceable wild fish: Study",
+          "handle": "seafood-industry-resists-push-to-reel-in-traceable-wild-fish-study",
+          "content": "This is not surprising to anyone in the industry. Especially small scale, direct marketers. In 2018, my partner and I traveled to New York City to take part in the stories, seafood experience, put on by a project, called fish coin. Fish coins, goals were to incentivize traceability, and provide compensation to those good actors within the supply chain. It was at the height of the crypto bubble, but what attracted me to the project was the technology and the core fundamentals, which I still align with. In 2026 rules for the food safety in modernization act will start to be enforced and many of these bad players will have to comply or face stiff consequences. Companies like seed to table have already seen what can happen when they get a little lackadaisical with their recording as outlined in this 2019 article from the AP. Companies like ThisFish Inc., Envisible, Certified Quality Foods, are important to help with increasing transparency. They are fighting goliath, many of the large current players would rather you did not know everything about your fish:Check out this aritcle: ﻿https://phys.org/news/2023-05-seafood-industry-resists-reel-traceable.html\"The article published in the journal Technology in Society found an oligopoly of big seafood wholesalers and fish markets are reluctant to use traceability technologies, as a way of avoiding closer scrutiny on their supply chain practices.\"",
+          "publishedAt": "2023-11-21T13:47:04Z",
+          "tags": [
+            "Fraud",
+            "Mislabeling",
+            "News",
+            "Traceability"
+          ],
+          "image": "Global_Fishing_Watch_Screenshot_0b1313a0-e96c-4b5c-89f7-7b4b4b8e5e9f.png"
+        },
+        {
+          "id": "gid://shopify/Article/588819628260",
+          "title": "Oceana Reveals Mislabeling of Americas Favorite Fish: Salmon",
+          "handle": "oceana-reveals-mislabeling-of-americas-favorite-fish-salmon",
+          "content": "This is an older artice but still relevant. In fact not much has changed since this report came out. The best thing you can do is ask your server, fishmonger, Chef etc, Where did your fish come from? https://cdn.shopify.com/s/files/1/0419/3206/2870/files/Oceana_report_on_mislabeling.pdf?v=1687722149",
+          "publishedAt": "2023-06-25T19:49:23Z",
+          "tags": [
+            "Fraud",
+            "Mislabeling"
+          ],
+          "image": "Screenshot_2023-06-25_at_3.49.47_PM.jpg"
+        }
+      ]
+    },
+    {
+      "id": "gid://shopify/Blog/89986793700",
+      "title": "Salmon Recipes",
+      "handle": "salmon-recipes",
+      "articles": []
+    },
+    {
+      "id": "gid://shopify/Blog/89986957540",
+      "title": "Whitefish Recipes",
+      "handle": "whitefish-recipes",
+      "articles": []
+    }
+  ]
+}

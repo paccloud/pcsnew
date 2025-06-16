@@ -1,0 +1,93 @@
+/**
+ * Social Sharing Styles
+ */
+
+/* Base styles for social sharing buttons */
+.recipe-social-share .wp-block-buttons {
+    gap: 10px;
+}
+
+.recipe-social-share .wp-block-button__link {
+    transition: all 0.3s ease;
+}
+
+/* Facebook button */
+.social-share-facebook .wp-block-button__link {
+    color: #1877f2;
+    border-color: #1877f2;
+}
+
+.social-share-facebook .wp-block-button__link:hover {
+    background-color: #1877f2;
+    color: #ffffff;
+}
+
+/* Twitter button */
+.social-share-twitter .wp-block-button__link {
+    color: #1da1f2;
+    border-color: #1da1f2;
+}
+
+.social-share-twitter .wp-block-button__link:hover {
+    background-color: #1da1f2;
+    color: #ffffff;
+}
+
+/* Pinterest button */
+.social-share-pinterest .wp-block-button__link {
+    color: #e60023;
+    border-color: #e60023;
+}
+
+.social-share-pinterest .wp-block-button__link:hover {
+    background-color: #e60023;
+    color: #ffffff;
+}
+
+/* Email button */
+.social-share-email .wp-block-button__link {
+    color: #718096;
+    border-color: #718096;
+}
+
+.social-share-email .wp-block-button__link:hover {
+    background-color: #718096;
+    color: #ffffff;
+}
+
+/* Print button */
+.recipe-print-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: 1px solid #718096;
+    color: #718096;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.recipe-print-button:hover {
+    background-color: #718096;
+    color: #ffffff;
+}
+
+.recipe-print-button svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .recipe-social-share .wp-block-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .recipe-social-share .wp-block-button {
+        width: 100%;
+    }
+}

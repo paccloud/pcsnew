@@ -1,0 +1,67 @@
+<?php
+/**
+ * Recipe Template Class
+ * 
+ * Handles recipe template functionality
+ * 
+ * @package PCS_Enhanced_Recipes
+ */
+
+// Exit if accessed directly
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+/**
+ * Recipe Template Class
+ */
+class PCS_Recipe_Template {
+    /**
+     * Constructor
+     */
+    public function __construct() {
+        // Initialize hooks
+        add_filter('single_template', array($this, 'recipe_single_template'));
+        add_filter('archive_template', array($this, 'recipe_archive_template'));
+        add_filter('taxonomy_template', array($this, 'recipe_taxonomy_template'));
+    }
+    
+    /**
+     * Single recipe template
+     */
+    public function recipe_single_template($template) {
+        if (is_singular('recipe')) {
+            $custom_template = PCS_ER_PLUGIN_DIR . 'templates/single-recipe.php';
+            if (file_exists($custom_template)) {
+                return $custom_template;
+            }
+        }
+        return $template;
+    }
+    
+    /**
+     * Recipe archive template
+     */
+    public function recipe_archive_template($template) {
+        if (is_post_type_archive('recipe')) {
+            $custom_template = PCS_ER_PLUGIN_DIR . 'templates/archive-recipe.php';
+            if (file_exists($custom_template)) {
+                return $custom_template;
+            }
+        }
+        return $template;
+    }
+    
+    /**
+     * Recipe taxonomy template
+     */
+    public function recipe_taxonomy_template($template) {
+        if (is_tax('recipe_category') || is_tax('recipe_tag')) {
+            $custom_template = PCS_ER_PLUGIN_DIR . 'templates/taxonomy-recipe.php';
+            if (file_exists($custom_template)) {
+                return $custom_template;
+            }
+        }
+        return $template;
+    }
+}

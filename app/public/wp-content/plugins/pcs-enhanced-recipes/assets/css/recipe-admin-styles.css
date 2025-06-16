@@ -1,0 +1,61 @@
+/**
+ * Recipe Admin Styles
+ */
+
+/* Meta Box Styling */
+.pcs-recipe-meta-box {
+    margin-top: 10px;
+}
+
+.pcs-recipe-field {
+    margin-bottom: 15px;
+}
+
+.pcs-recipe-field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.pcs-recipe-field input[type="text"],
+.pcs-recipe-field input[type="number"],
+.pcs-recipe-field textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Settings Page */
+.pcs-recipe-settings-wrap h2 {
+    margin-bottom: 20px;
+}
+
+.pcs-recipe-settings-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+
+.pcs-recipe-settings-field {
+    margin-bottom: 15px;
+}
+
+.pcs-recipe-settings-field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+/* Admin Columns */
+.column-thumbnail {
+    width: 60px;
+}
+
+.column-prep_time,
+.column-cook_time {
+    width: 100px;
+    text-align: center;
+}

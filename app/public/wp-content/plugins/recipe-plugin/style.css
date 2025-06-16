@@ -1,0 +1,23 @@
+.recipe-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.recipe-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+.recipe-details p {
+    margin: 8px 0;
+    font-size: 16px;
+}
+.recipe-ingredients ul {
+    list-style-type: square;
+    padding-left: 20px;
+}
+.recipe-ingredients li {
+    margin: 5px 0;
+}

@@ -1,0 +1,93 @@
+<?php
+/**
+ * Recipe Assets Class
+ * 
+ * Handles recipe CSS and JS assets
+ * 
+ * @package PCS_Enhanced_Recipes
+ */
+
+// Exit if accessed directly
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+/**
+ * Recipe Assets Class
+ */
+class PCS_Recipe_Assets {
+    /**
+     * Constructor
+     */
+    public function __construct() {
+        // Initialize hooks
+        add_action('wp_enqueue_scripts', array($this, 'enqueue_frontend_assets'));
+        add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
+    }
+    
+    /**
+     * Enqueue frontend assets
+     */
+    public function enqueue_frontend_assets() {
+        // Only load on recipe pages
+        if (!is_singular('recipe') && !is_post_type_archive('recipe') && !is_tax('recipe_category') && !is_tax('recipe_tag')) {
+            return;
+        }
+        
+        // Enqueue CSS
+        wp_enqueue_style(
+            'pcs-recipe-styles',
+            PCS_ER_PLUGIN_URL . 'assets/css/recipe-styles.css',
+            array(),
+            PCS_ER_VERSION
+        );
+        
+        // Enqueue JS
+        wp_enqueue_script(
+            'pcs-recipe-scripts',
+            PCS_ER_PLUGIN_URL . 'assets/js/recipe-scripts.js',
+            array('jquery'),
+            PCS_ER_VERSION,
+            true
+        );
+        
+        // Localize script
+        wp_localize_script(
+            'pcs-recipe-scripts',
+            'pcsRecipeData',
+            array(
+                'ajaxUrl' => admin_url('admin-ajax.php'),
+                'nonce' => wp_create_nonce('pcs-recipe-nonce')
+            )
+        );
+    }
+    
+    /**
+     * Enqueue admin assets
+     */
+    public function enqueue_admin_assets($hook) {
+        global $post_type;
+        
+        // Only load on recipe edit screens
+        if (!('post.php' === $hook || 'post-new.php' === $hook) || 'recipe' !== $post_type) {
+            return;
+        }
+        
+        // Enqueue CSS
+        wp_enqueue_style(
+            'pcs-recipe-admin-styles',
+            PCS_ER_PLUGIN_URL . 'assets/css/recipe-admin-styles.css',
+            array(),
+            PCS_ER_VERSION
+        );
+        
+        // Enqueue JS
+        wp_enqueue_script(
+            'pcs-recipe-admin-scripts',
+            PCS_ER_PLUGIN_URL . 'assets/js/recipe-admin-scripts.js',
+            array('jquery'),
+            PCS_ER_VERSION,
+            true
+        );
+    }
+}
