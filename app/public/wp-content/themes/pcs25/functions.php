@@ -96,6 +96,35 @@ function pcs25_theme_setup() {
 add_action('after_setup_theme', 'pcs25_theme_setup');
 
 /**
+ * Force use of child theme archive-recipe.php template instead of plugin one
+ */
+function pcs25_override_recipe_archive_template( $template ) {
+    if ( is_post_type_archive( 'recipe' ) ) {
+        $theme_tpl = get_stylesheet_directory() . '/archive-recipe.php';
+        if ( file_exists( $theme_tpl ) ) {
+            return $theme_tpl; // override plugin template
+        }
+    }
+    return $template;
+}
+// Run late so we override plugin's earlier filter.
+add_filter( 'archive_template', 'pcs25_override_recipe_archive_template', 99 );
+
+/**
+ * Final safeguard – override plugin's template_include for recipe archives (priority 1001)
+ */
+function pcs25_force_recipe_archive_template_include( $template ) {
+    if ( is_post_type_archive( 'recipe' ) ) {
+        $theme_tpl = get_stylesheet_directory() . '/archive-recipe.php';
+        if ( file_exists( $theme_tpl ) ) {
+            return $theme_tpl;
+        }
+    }
+    return $template;
+}
+add_filter( 'template_include', 'pcs25_force_recipe_archive_template_include', 1001 );
+
+/**
  * Add print styles to head for recipe pages
  */
 function pcs25_add_print_styles() {

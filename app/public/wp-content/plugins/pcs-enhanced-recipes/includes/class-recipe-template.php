@@ -22,9 +22,9 @@ class PCS_Recipe_Template {
      */
     public function __construct() {
         // For block themes, add template handling
-        if ($this->is_using_block_theme()) {
-            add_filter('template_include', array($this, 'block_theme_template'), 999);
-        }
+        // For block themes, rely on default template hierarchy so that the active theme (or other filters)
+        // can handle header/footer output. The custom block-theme override caused header/footer-only output.
+        // add_filter('template_include', array($this, 'block_theme_template'), 999);
         
         // For classic themes, use template filters
         add_filter('single_template', array($this, 'recipe_single_template'));
@@ -136,6 +136,10 @@ class PCS_Recipe_Template {
      * Recipe archive template (for both classic and block themes)
      */
     public function recipe_archive_template($template) {
+        // If using a block theme, let the theme (or wp-template hierarchy) handle the archive.
+        if ( $this->is_using_block_theme() ) {
+            return $template;
+        }
         if (is_post_type_archive('recipe')) {
             $custom_template = PCS_ER_PLUGIN_DIR . 'templates/archive-recipe.php';
             if (file_exists($custom_template)) {

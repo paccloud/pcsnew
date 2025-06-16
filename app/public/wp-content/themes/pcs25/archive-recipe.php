@@ -5,14 +5,8 @@
  * @package PCS_Enhanced_Recipes
  */
 
-if ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() ) {
+get_header();
 
-    if ( function_exists( 'wp_template_part' ) ) {
-
-    }
-} else {
-
-}
 ?>
 
 <div class="pcs-recipe-archive-container">
@@ -197,10 +191,4 @@ if ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() ) {
 </div>
 
 <?php
-if ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() ) {
-    if ( function_exists( 'wp_template_part' ) ) {
-
-    }
-} else {
-
-}
+get_footer();

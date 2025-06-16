@@ -4,6 +4,8 @@
  *
  * @package PCS_Enhanced_Recipes
  */
+
+get_header();
 ?>
 
 <div class="pcs-recipe-archive-container">

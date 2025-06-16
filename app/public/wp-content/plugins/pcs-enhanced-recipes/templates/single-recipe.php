@@ -39,14 +39,11 @@ while ( have_posts() ) :
     // Get the recipe content
     $recipe_content = ob_get_clean();
     
-    // For block themes, wrap our content in the theme's template
-    if ($is_block_theme) {
-        // Get block template parts
-        $template_part_header = get_block_template_html('header');
-        $template_part_footer = get_block_template_html('footer');
-        
-        // Output with block theme template parts
-        echo $template_part_header;
+    // Output the correct header depending on theme type
+    if ( $is_block_theme && function_exists( 'get_block_template_html' ) ) {
+        echo get_block_template_html( 'header' );
+    } else {
+        get_header();
     }
     ?>
     
@@ -396,9 +393,9 @@ while ( have_posts() ) :
     </div>
     
     <?php
-    // Close block theme template
-    if ($is_block_theme) {
-        echo $template_part_footer;
+    // Output the correct footer depending on theme type
+    if ( $is_block_theme && function_exists( 'get_block_template_html' ) ) {
+        echo get_block_template_html( 'footer' );
     } else {
         get_footer();
     }
