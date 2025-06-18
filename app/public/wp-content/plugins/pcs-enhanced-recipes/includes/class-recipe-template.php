@@ -163,6 +163,105 @@ class PCS_Recipe_Template {
             'type' => 'string',
         ));
     }
+
+    /**
+     * Process ingredients string into HTML with data attributes for unit conversion.
+     *
+     * @param string $ingredients_html Raw HTML list of ingredients.
+     * @return string Processed HTML with data attributes.
+     */
+    public function get_processed_ingredients_html($ingredients_html) {
+        if (empty($ingredients_html)) {
+            return '';
+        }
+
+        $processed_ingredients = $ingredients_html;
+
+        $pattern = '/<li>(.*?)<\/li>/s';
+        preg_match_all($pattern, $ingredients_html, $matches);
+
+        if (empty($matches[1])) {
+            return $ingredients_html;
+        }
+
+        foreach ($matches[1] as $ingredient_text) {
+            $trimmed_text = trim($ingredient_text);
+            $amount_pattern = '/^(\d+[\.\d]*|\d*\/\d+|\d+\s\d+\/\d+)\s*([a-zA-Z]+)?/';
+
+            if (preg_match($amount_pattern, $trimmed_text, $amount_matches)) {
+                $amount = $amount_matches[1];
+                $unit = isset($amount_matches[2]) ? $amount_matches[2] : '';
+
+                // Convert fractions to decimals for calculation
+                $decimal_amount = 0;
+                if (strpos($amount, ' ') !== false) { // Mixed fraction e.g., "1 1/2"
+                    $mixed_parts = explode(' ', $amount);
+                    $whole = (float) $mixed_parts[0];
+                    if (!empty($mixed_parts[1]) && strpos($mixed_parts[1], '/') !== false) {
+                        $fraction_parts = explode('/', $mixed_parts[1]);
+                        if (count($fraction_parts) === 2 && is_numeric($fraction_parts[0]) && is_numeric($fraction_parts[1]) && $fraction_parts[1] != 0) {
+                            $decimal_amount = $whole + ($fraction_parts[0] / $fraction_parts[1]);
+                        }
+                    }
+                } elseif (strpos($amount, '/') !== false) { // Simple fraction e.g., "1/2"
+                    $parts = explode('/', $amount);
+                    if (count($parts) === 2 && is_numeric($parts[0]) && is_numeric($parts[1]) && $parts[1] != 0) {
+                        $decimal_amount = $parts[0] / $parts[1];
+                    }
+                } else { // Decimal or whole number
+                    $decimal_amount = (float) $amount;
+                }
+
+                if ($decimal_amount == 0) continue; // Skip if parsing failed
+
+                // Calculate metric conversion
+                $metric_amount = $decimal_amount;
+                $metric_unit = $unit;
+                $us_unit = $unit;
+
+                switch (strtolower($unit)) {
+                    case 'cup': case 'cups':
+                        $metric_amount = $decimal_amount * 236.6; $metric_unit = 'ml';
+                        break;
+                    case 'tbsp': case 'tablespoon': case 'tablespoons':
+                        $metric_amount = $decimal_amount * 15; $metric_unit = 'ml';
+                        break;
+                    case 'tsp': case 'teaspoon': case 'teaspoons':
+                        $metric_amount = $decimal_amount * 5; $metric_unit = 'ml';
+                        break;
+                    case 'oz': case 'ounce': case 'ounces':
+                        $metric_amount = $decimal_amount * 28.35; $metric_unit = 'g';
+                        break;
+                    case 'lb': case 'pound': case 'pounds':
+                        $metric_amount = $decimal_amount * 453.6; $metric_unit = 'g';
+                        break;
+                    case 'inch': case 'inches':
+                        $metric_amount = $decimal_amount * 2.54; $metric_unit = 'cm';
+                        break;
+                }
+
+                if ($metric_unit === 'ml' && $metric_amount >= 1000) {
+                    $metric_amount /= 1000;
+                    $metric_unit = 'L';
+                } elseif ($metric_unit === 'g' && $metric_amount >= 1000) {
+                    $metric_amount /= 1000;
+                    $metric_unit = 'kg';
+                }
+
+                $metric_amount = round($metric_amount, 2);
+
+                $us_display = esc_html($amount . ($us_unit ? ' ' . $us_unit : ''));
+                $metric_display = esc_html($metric_amount . ($metric_unit ? ' ' . $metric_unit : ''));
+
+                $replacement_span = '<span class="pcs-ingredient-amount" data-us="' . esc_attr($us_display) . '" data-metric="' . esc_attr($metric_display) . '">' . $us_display . '</span>';
+                $new_ingredient_text = preg_replace('/^' . preg_quote($amount . ($unit ? ' ' . $unit : ''), '/') . '/', $replacement_span, $trimmed_text, 1);
+
+                $processed_ingredients = str_replace('<li>' . $ingredient_text . '</li>', '<li>' . $new_ingredient_text . '</li>', $processed_ingredients);
+            }
+        }
+
+        return $processed_ingredients;
+    }
     
     /**
      * Enqueue recipe assets (scripts and styles)

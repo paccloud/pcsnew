@@ -37,6 +37,24 @@ class PCS_Recipe_Meta {
             'normal',
             'high'
         );
+        
+        add_meta_box(
+            'pcs_recipe_ingredients',
+            __('Recipe Ingredients', 'pcs-enhanced-recipes'),
+            array($this, 'render_recipe_ingredients_meta_box'),
+            'recipe',
+            'normal',
+            'high'
+        );
+        
+        add_meta_box(
+            'pcs_recipe_instructions',
+            __('Recipe Instructions', 'pcs-enhanced-recipes'),
+            array($this, 'render_recipe_instructions_meta_box'),
+            'recipe',
+            'normal',
+            'high'
+        );
     }
     
     /**
