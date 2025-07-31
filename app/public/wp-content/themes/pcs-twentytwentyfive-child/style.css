@@ -4,13 +4,66 @@ Theme URI: https://pacificcloudseafoods.com/
 Description: Child theme for PCS based on Twenty Twenty-Five
 Author: Ryan Horwath
 Template: twentytwentyfive
-Version: 0.1
+Version: 1.4
 */
 
+/* Recipe Archive Styling */
 .pcs-recipe-archive-container {
-    max-width: 1140px; /* Or your preferred max width */
+    max-width: 1140px;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 15px; /* Optional: for some spacing on smaller screens */
-    padding-right: 15px; /* Optional: for some spacing on smaller screens */
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Ensure proper spacing for recipe grid */
+.wp-block-post-template.is-layout-grid {
+    gap: 2rem;
+}
+
+/* Recipe card styling */
+.wp-block-post-template .wp-block-group {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wp-block-post-template .wp-block-group:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Featured image styling */
+.wp-block-post-featured-image {
+    overflow: hidden;
+}
+
+.wp-block-post-featured-image img {
+    transition: transform 0.3s ease;
+}
+
+.wp-block-post-featured-image:hover img {
+    transform: scale(1.05);
+}
+
+/* Blog post styling */
+.wp-block-query .wp-block-post-title {
+    margin-bottom: 0.5rem;
+}
+
+.wp-block-post-excerpt {
+    margin-bottom: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .wp-block-post-template.is-layout-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .pcs-recipe-archive-container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 }

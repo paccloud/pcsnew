@@ -1,0 +1,178 @@
+name: Deploy Pacific Cloud Seafood to Hostinger
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+        - production
+        - staging
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+          
+    - name: Install dependencies (if package.json exists)
+      run: |
+        if [ -f package.json ]; then
+          npm ci
+        else
+          echo "No package.json found, skipping npm install"
+        fi
+        
+    - name: Build assets (if needed)
+      run: |
+        if [ -f package.json ] && npm run build --if-present; then
+          echo "Assets built successfully"
+        else
+          echo "No build script found or no package.json, skipping build"
+        fi
+        
+    - name: Prepare deployment files
+      run: |
+        # Create deployment directory
+        mkdir -p deploy
+        
+        # Copy WordPress theme
+        if [ -d "app/public/wp-content/themes/pcs-twentytwentyfive-child" ]; then
+          mkdir -p deploy/wp-content/themes
+          cp -r app/public/wp-content/themes/pcs-twentytwentyfive-child deploy/wp-content/themes/
+          echo "✓ Copied child theme"
+        fi
+        
+        # Copy custom plugins
+        mkdir -p deploy/wp-content/plugins
+        for plugin in pcs-blog-importer pcs-enhanced-recipes pcs-recipe-importer pcs-universal-importer; do
+          if [ -d "app/public/wp-content/plugins/$plugin" ]; then
+            cp -r "app/public/wp-content/plugins/$plugin" deploy/wp-content/plugins/
+            echo "✓ Copied plugin: $plugin"
+          fi
+        done
+        
+        # Copy uploads (selective - only recent files to avoid large transfers)
+        if [ -d "app/public/wp-content/uploads" ]; then
+          mkdir -p deploy/wp-content/uploads
+          # Copy only image files from the last 30 days
+          find app/public/wp-content/uploads -name "*.jpg" -o -name "*.png" -o -name "*.gif" -o -name "*.webp" -mtime -30 | head -50 | while read file; do
+            if [ -f "$file" ]; then
+              cp "$file" deploy/wp-content/uploads/ 2>/dev/null || true
+            fi
+          done
+          echo "✓ Copied recent media files"
+        fi
+        
+        # Create deployment info file
+        cat > deploy/DEPLOYMENT_INFO.txt << EOF
+        Pacific Cloud Seafood - Automated Deployment
+        Deployed: $(date)
+        Commit: ${{ github.sha }}
+        Branch: ${{ github.ref_name }}
+        Triggered by: ${{ github.actor }}
+        
+        Files included:
+        - Child theme: pcs-twentytwentyfive-child
+        - Custom plugins: pcs-blog-importer, pcs-enhanced-recipes, pcs-recipe-importer, pcs-universal-importer
+        - Recent media files (last 30 days)
+        EOF
+        
+        echo "Deployment package prepared:"
+        ls -la deploy/
+        
+    - name: Deploy to Hostinger via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./deploy/
+        server-dir: /public_html/
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+          **/logs/**
+          **/conf/**
+          **/.DS_Store
+          **/memory-bank/**
+          **/*.log
+          **/wp-config.php
+          
+    - name: Verify deployment
+      run: |
+        echo "Deployment completed successfully!"
+        echo "Please verify the following:"
+        echo "1. Check that the website loads correctly"
+        echo "2. Verify theme is active and displaying properly"
+        echo "3. Test custom plugins functionality"
+        echo "4. Check blog importer plugin"
+        echo "5. Verify recipe functionality"
+        
+    - name: Notify deployment status
+      if: always()
+      run: |
+        if [ "${{ job.status }}" == "success" ]; then
+          echo "✅ Deployment successful!"
+        else
+          echo "❌ Deployment failed!"
+        fi
+        
+  # Optional: Add a job to run tests after deployment
+  test:
+    needs: deploy
+    runs-on: ubuntu-latest
+    if: success()
+    
+    steps:
+    - name: Test website availability
+      run: |
+        # Replace with your actual domain
+        DOMAIN="${{ secrets.WEBSITE_URL || 'https://yourdomain.com' }}"
+        
+        echo "Testing website availability..."
+        if curl -f -s "$DOMAIN" > /dev/null; then
+          echo "✅ Website is accessible"
+        else
+          echo "❌ Website is not accessible"
+          exit 1
+        fi
+        
+    - name: Test specific pages
+      run: |
+        DOMAIN="${{ secrets.WEBSITE_URL || 'https://yourdomain.com' }}"
+        
+        # Test recipe page
+        if curl -f -s "$DOMAIN/recipe/" > /dev/null; then
+          echo "✅ Recipe page is accessible"
+        else
+          echo "⚠️ Recipe page may not be accessible"
+        fi
+        
+        # Test blog page
+        if curl -f -s "$DOMAIN/blog/" > /dev/null; then
+          echo "✅ Blog page is accessible"
+        else
+          echo "⚠️ Blog page may not be accessible"
+        fi

@@ -19,7 +19,6 @@ use function KadenceWP\KadenceStarterTemplates\StellarWP\Uplink\get_disconnect_u
 use function KadenceWP\KadenceStarterTemplates\StellarWP\Uplink\get_license_domain;
 use function KadenceWP\KadenceStarterTemplates\StellarWP\Uplink\is_authorized;
 use function KadenceWP\KadenceStarterTemplates\StellarWP\Uplink\build_auth_url;
-use function kadence_blocks_get_current_license_data;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -56,26 +55,6 @@ class Site_Assist_Dash {
 		}
 		add_action( 'init', [ $this, 'init_config' ] );
 		add_action( 'rest_api_init', [ $this, 'register_api_endpoints' ] );
-	}
-	/**
-	 * Get the current license key for the plugin.
-	 *
-	 * @return string 
-	 */
-	public function get_current_license_key() {
-
-		if ( function_exists( 'kadence_blocks_get_current_license_data' ) ) {
-			$data = kadence_blocks_get_current_license_data();
-			if ( ! empty( $data['key'] ) ) {
-				return $data['key'];
-			}
-		} else {
-			$key = get_license_key( 'kadence-starter-templates' );
-			if ( ! empty( $key ) ) {
-				return $key;
-			}
-		}
-		return '';
 	}
 	/**
 	 * Add the admin page
@@ -803,7 +782,8 @@ class Site_Assist_Dash {
 			$token          = get_authorization_token( $slug );
 			$auth_url       = build_auth_url( apply_filters( 'kadence-blocks-auth-slug', $slug ), get_license_domain() );
 		}
-		$license_key    = $this->get_current_license_key();
+		$license_data = kadence_starter_templates_get_license_data();
+		$license_key = $license_data['api_key'];
 		$disconnect_url = '';
 		$is_authorized  = false;
 		if ( ! empty( $license_key ) ) {
@@ -918,13 +898,13 @@ class Site_Assist_Dash {
 		$username = $current_user->user_login;
 		$return_data = [
 			[
-				'title'       => __( 'AI Starter Site', 'kadence-starter-templates' ),
+				'title'       => __( 'AI Powered Site and Starter Template', 'kadence-starter-templates' ),
 				'description' => __( 'Get started with your new site by setting up key information and importing a starter site.', 'kadence-starter-templates' ),
 				'slug'        => 'ai-starter-site',
 				'tasks'       => [
 					[
 						'title'       => __( 'Activate Kadence AI', 'kadence-starter-templates' ),
-						'description' => __( 'Connect Kadence AI to your site by clicking the button below.', 'kadence-starter-templates' ),
+						'description' => __( 'Connect Kadence AI to your site by clicking the button below. This will allow you to import an AI Assisted Starter Template or use Kadence AI to generate custom content for your site.', 'kadence-starter-templates' ),
 						'button'      => ! $is_authorized ? __( 'Activate', 'kadence-starter-templates' ) : __( 'Connected', 'kadence-starter-templates' ),
 						'link'        => ! $is_authorized ? $auth_url : '',
 						'completed'   => $is_authorized ? true : false,
@@ -933,7 +913,7 @@ class Site_Assist_Dash {
 					],
 					[
 						'title'       => __( 'Set up Site AI Profile', 'kadence-starter-templates' ),
-						'description' => __( 'Set up your site AI profile to get started with your new site.', 'kadence-starter-templates' ),
+						'description' => __( 'Set up your site AI profile to get started with your new site. This will allow you to import an AI Assisted Starter Template or use Kadence AI to generate custom content for your site.', 'kadence-starter-templates' ),
 						'button'      => $has_ai_profile ? __( 'Edit', 'kadence-starter-templates' ) : __( 'Set Up', 'kadence-starter-templates' ),
 						'link'        => admin_url( 'admin.php?page=kadence-starter-templates&ai=wizard' ),
 						'completed'   => $has_ai_profile,
@@ -941,10 +921,10 @@ class Site_Assist_Dash {
 						'sameTab'     => true,
 					],
 					[
-						'title'       => __( 'Import AI Starter Site', 'kadence-starter-templates' ),
-						'description' => __( 'Import an AI Starter Site to get started with your new site.', 'kadence-starter-templates' ),
+						'title'       => __( 'Import an AI Powered Template or a Pre-Designed Template', 'kadence-starter-templates' ),
+						'description' => __( 'AI Powered Templates are less opinionated styles but already have content and images that match your brand making it easier to get started. Pre-Designed Templates are professionally designed templates that you can customize to your liking.', 'kadence-starter-templates' ),
 						'button'      => $has_previous ? __( 'Re-Import', 'kadence-starter-templates' ) : __( 'Import', 'kadence-starter-templates' ),
-						'link'        => admin_url( 'admin.php?page=kadence-starter-templates' ),
+						'link'        => admin_url( 'admin.php?page=kadence-starter-templates&choose=force' ),
 						'completed'   => $has_previous,
 						'sameTab'     => true,
 						'requires'    => $has_ai_profile ? false : true,
