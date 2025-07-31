@@ -179,6 +179,40 @@ function pcs_site_fixer_page() {
         echo '</ul></div>';
         echo '<div class="notice notice-info"><p><strong>Important:</strong> Please check your site to ensure all pages are displaying correctly with headers and footers.</p></div>';
     }
+
+    if (isset($_POST['fix_full_width'])) {
+        include get_stylesheet_directory() . '/fix-full-width.php';
+        $results = pcs_fix_full_width();
+        echo '<div class="notice notice-success"><p>Full-width fix completed:</p><ul>';
+        foreach ($results as $result) {
+            echo '<li>' . $result . '</li>';
+        }
+        echo '</ul></div>';
+
+        $status = pcs_check_full_width_status();
+        echo '<div class="notice notice-info"><p>Full-width status after fix:</p><ul>';
+        foreach ($status as $status_item) {
+            echo '<li>' . $status_item . '</li>';
+        }
+        echo '</ul></div>';
+    }
+
+    if (isset($_POST['debug_header'])) {
+        echo '<div class="notice notice-info"><p>Header debug information:</p></div>';
+        include get_stylesheet_directory() . '/debug-header.php';
+        pcs_debug_header();
+        return;
+    }
+
+    if (isset($_POST['clear_header_db'])) {
+        include get_stylesheet_directory() . '/debug-header.php';
+        $results = pcs_clear_database_header_templates();
+        echo '<div class="notice notice-success"><p>Database header templates cleared:</p><ul>';
+        foreach ($results as $result) {
+            echo '<li>' . $result . '</li>';
+        }
+        echo '</ul></div>';
+    }
     
     ?>
     <div class="wrap">
@@ -225,6 +259,24 @@ function pcs_site_fixer_page() {
         <p><strong>Complete template solution:</strong> Creates all missing templates, ensures footers are included, and verifies template hierarchy.</p>
         <form method="post" action="">
             <input type="submit" name="fix_all_templates" class="button-primary" value="Fix All Templates" onclick="return confirm('This will perform a comprehensive template fix. This may create/modify multiple template files. Continue?');" style="background-color: #d63638; border-color: #d63638;" />
+        </form>
+
+        <h2>Fix Full-Width Header & Footer</h2>
+        <p><strong>Make header and footer stretch full screen width:</strong> Updates template parts and CSS to ensure header and footer span the entire width of the screen.</p>
+        <form method="post" action="">
+            <input type="submit" name="fix_full_width" class="button-primary" value="Fix Full-Width Layout" onclick="return confirm('This will update header and footer templates to use full-width layout. Continue?');" />
+        </form>
+
+        <h2>Debug Header Template</h2>
+        <p>Check which header template is being used and identify any database overrides that might prevent file changes from taking effect.</p>
+        <form method="post" action="">
+            <input type="submit" name="debug_header" class="button-secondary" value="Debug Header" />
+        </form>
+
+        <h2>Clear Database Header Templates</h2>
+        <p><strong>Force use of file-based header:</strong> Removes any database-stored header template parts that might be overriding your file-based header template.</p>
+        <form method="post" action="">
+            <input type="submit" name="clear_header_db" class="button-primary" value="Clear Database Headers" onclick="return confirm('This will delete any database-stored header templates and force WordPress to use your file-based header template. Continue?');" style="background-color: #d63638; border-color: #d63638;" />
         </form>
         
         <h2>Current Status</h2>

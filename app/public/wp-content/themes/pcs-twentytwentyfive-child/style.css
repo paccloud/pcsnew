@@ -4,8 +4,49 @@ Theme URI: https://pacificcloudseafoods.com/
 Description: Child theme for PCS based on Twenty Twenty-Five
 Author: Ryan Horwath
 Template: twentytwentyfive
-Version: 1.4
+Version: 1.5
 */
+
+/* Full-width Header and Footer Styles */
+/* Force header and footer to stretch full width */
+.wp-site-blocks > header,
+.wp-site-blocks > footer {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+}
+
+/* Ensure header content spans full width */
+.wp-site-blocks > header .wp-block-group {
+    max-width: none !important;
+    width: 100%;
+}
+
+/* Ensure footer content spans full width */
+.wp-site-blocks > footer .wp-block-group {
+    max-width: none !important;
+    width: 100%;
+}
+
+/* Override constrained layout for header and footer */
+.wp-site-blocks > header .wp-block-group.alignfull,
+.wp-site-blocks > footer .wp-block-group.alignfull {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    max-width: none !important;
+}
+
+/* Header specific full-width styling */
+.wp-site-blocks > header .wp-block-group[class*="layout"] {
+    padding-left: var(--wp--preset--spacing--50);
+    padding-right: var(--wp--preset--spacing--50);
+}
+
+/* Footer specific full-width styling */
+.wp-site-blocks > footer .wp-block-group[class*="layout"] {
+    padding-left: var(--wp--preset--spacing--50);
+    padding-right: var(--wp--preset--spacing--50);
+}
 
 /* Recipe Archive Styling */
 .pcs-recipe-archive-container {
