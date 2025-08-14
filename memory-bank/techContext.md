@@ -308,3 +308,31 @@ if ($this->is_using_block_theme()) {
 1. Manual navigation testing
 2. Screen recording analysis
 3. DOM inspection via browser tools
+
+## 2025-08-13 - Homepage Template Override Fix
+
+- Added PCS Site Fixer action "Clear Front/Home DB Templates" to ensure file-based homepage renders.
+- Location: `wp-content/themes/pcs-twentytwentyfive-child/functions.php`.
+
+### Implementation Notes
+- Function: `pcs_clear_front_home_db_templates()`.
+- Targets post type: `wp_template`.
+- Slugs: `front-page`, `home`.
+- Scoped to active theme via taxonomy: `wp_theme` term = `get_stylesheet()`.
+- Deletes matches with `wp_delete_post($id, true)`; then calls `flush_rewrite_rules(false)`.
+- Admin UI: Tools → PCS Site Fixer → "Clear Front/Home DB Templates" button posts `clear_front_home_db`.
+
+### Rationale
+- In block themes, DB-stored templates (created/edited in Site Editor) override file templates.
+- Deleting DB overrides for `front-page`/`home` forces WordPress to fall back to `templates/front-page.html` and `templates/home.html` from the child theme.
+
+### Verification Steps
+1. WP Admin → Tools → PCS Site Fixer → run "Clear Front/Home DB Templates".
+2. Optionally run "Clear Database Headers"; Settings → Permalinks → Save.
+3. Hard refresh `/` and confirm:
+   - Hero with Fresh Fix logo and CTAs
+   - "Featured Recipes" grid `[pcs_recipe_grid]`
+   - H2 "Latest from the Blog" with 6-post loop
+
+### Future Improvement
+- Replace absolute logo URL with a media attachment ID or a theme asset reference for portability.

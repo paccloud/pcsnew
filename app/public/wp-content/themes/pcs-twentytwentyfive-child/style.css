@@ -16,6 +16,39 @@ Version: 1.5
     margin-right: calc(-50vw + 50%);
 }
 
+/* Categories Grid */
+.pcs-categories-grid .wp-block-categories,
+.pcs-categories-grid .wp-block-categories-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.pcs-categories-grid .wp-block-categories-list > li,
+.pcs-categories-grid .wp-block-categories > li {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pcs-categories-grid a {
+    text-decoration: none;
+}
+
+.pcs-categories-grid .wp-block-categories-list > li:hover,
+.pcs-categories-grid .wp-block-categories > li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
 /* Ensure header content spans full width */
 .wp-site-blocks > header .wp-block-group {
     max-width: none !important;
@@ -95,6 +128,17 @@ Version: 1.5
 
 .wp-block-post-excerpt {
     margin-bottom: 1rem;
+}
+
+/* Blog index and archives grid columns */
+.wp-block-query .wp-block-post-template.is-layout-grid {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1024px) {
+    .wp-block-query .wp-block-post-template.is-layout-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 /* Responsive adjustments */

@@ -588,3 +588,39 @@ Migrated product images from Shopify to WordPress media library for the followin
 - Scallops
 
 Total images copied: 76
+
+## 2025-08-13 - PCS Site Fixer: Clear Front/Home DB Templates
+
+- Added a new admin utility in `wp-content/themes/pcs-twentytwentyfive-child/functions.php` that exposes a PCS Site Fixer button: "Clear Front/Home DB Templates".
+- This action deletes DB-stored `wp_template` overrides for `front-page` and `home` scoped to the active child theme, ensuring file-based `templates/front-page.html` (and `templates/home.html`) are used.
+- Usage: WP Admin → Tools → PCS Site Fixer → Clear Front/Home DB Templates. Then optionally run Clear Database Headers and save permalinks.
+- Expected result: Homepage renders the new hero, Featured Recipes, and “Latest from the Blog” sections from the file-based template.
+
+## 2025-08-14 - Blog Layout Upgrade (Categories + Grid)
+
+- Improved posts index template at `wp-content/themes/pcs-twentytwentyfive-child/templates/home.html`:
+  - Inserted a "Browse by Category" section using the core Categories block with counts.
+  - Switched the Query Loop to a 3-column grid layout to reduce scrolling.
+- Added `templates/archive.html` in the child theme to override parent archives (includes Archive Title + Description and a 3-column Query Loop grid with pagination).
+- Updated `style.css` to support the new layout:
+  - Responsive categories grid styles under the `.pcs-categories-grid` wrapper.
+  - Enforced post grids to 3/2/1 columns at desktop/tablet/mobile.
+  - Kept existing card hover effects and spacing.
+- Notes/Considerations:
+  - If a DB-stored template for `home`/`archive` exists, use Tools → PCS Site Fixer to clear it so file-based templates take effect.
+  - Ensure Settings → Reading assigns a static homepage and sets a Posts page (e.g., `/blog/`) so `home.html` is used for the posts index.
+  - Minor block inline styles remain (padding/margins from Gutenberg); can consolidate into `theme.json` later.
+
+## 2025-08-14 - Separated Home and Blog
+
+- Updated `wp-content/themes/pcs-twentytwentyfive-child/templates/front-page.html`:
+  - Removed the "Latest from the Blog" query loop section so the homepage no longer lists posts.
+
+- Updated `wp-content/themes/pcs-twentytwentyfive-child/templates/home.html` to be a dedicated Blog index:
+  - Added H1 "Blog" at the top.
+  - Kept the "Browse by Category" grid and the 3-column posts grid with pagination.
+
+- Admin steps/notes:
+  - Settings → Reading: set a static Front page (Home) and set a Posts page (e.g., "Blog").
+  - If file-based templates do not appear, use Tools → PCS Site Fixer → Clear Front/Home DB Templates.
+  - Minor inline padding/margin styles remain from Gutenberg. Plan: move to `theme.json` or `style.css` to satisfy linter.

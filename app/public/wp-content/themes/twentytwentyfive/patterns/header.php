@@ -21,12 +21,7 @@
 			<!-- wp:site-title {"level":0} /-->
 			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"right"}} -->
 			<div class="wp-block-group">
-				<!-- wp:navigation {"overlayBackgroundColor":"base","overlayTextColor":"contrast","layout":{"type":"flex","justifyContent":"right","flexWrap":"wrap"}} -->
-				<!-- wp:navigation-link {"label":"Home","url":"/","kind":"custom","isTopLevelLink":true} /-->
-				<!-- wp:navigation-link {"label":"About Us","url":"/about-us","kind":"custom","isTopLevelLink":true} /-->
-				<!-- wp:navigation-link {"label":"Recipes","url":"/recipe","kind":"custom","isTopLevelLink":true} /-->
-				<!-- wp:navigation-link {"label":"Blog","url":"/blog","kind":"custom","isTopLevelLink":true} /-->
-				<!-- /wp:navigation -->
+				<!-- wp:navigation {"overlayBackgroundColor":"base","overlayTextColor":"contrast","layout":{"type":"flex","justifyContent":"right","flexWrap":"wrap"}} /-->
 			</div>
 			<!-- /wp:group -->
 		</div>

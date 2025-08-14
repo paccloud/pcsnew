@@ -171,29 +171,257 @@
     border-bottom: 3px solid var(--pcs-primary-color);
 }
 
-/* Ingredients */
-.pcs-ingredients-list ul {
+/* Enhanced Servings Section */
+.pcs-recipe-servings {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.pcs-recipe-servings-display {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.pcs-recipe-servings-adjust {
+    border-top: 1px solid #e9ecef;
+    padding-top: 1rem;
+}
+
+.pcs-servings-adjust-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #495057;
+}
+
+.pcs-servings-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.pcs-servings-buttons button {
+    background: #fff;
+    border: 2px solid var(--pcs-primary-color);
+    color: var(--pcs-primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.pcs-servings-buttons button:hover {
+    background: var(--pcs-primary-color);
+    color: #fff;
+}
+
+.pcs-servings-buttons button.active {
+    background: var(--pcs-primary-color);
+    color: #fff;
+}
+
+.pcs-custom-servings-input {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.pcs-custom-servings-input label {
+    font-weight: 600;
+    color: #495057;
+}
+
+.pcs-custom-servings-input input {
+    width: 80px;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+.pcs-custom-servings-input button {
+    background: var(--pcs-secondary-color);
+    color: #fff;
+    border: none;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+/* Enhanced Ingredients */
+.pcs-ingredients-list {
     list-style: none;
     padding: 0;
     margin: 0;
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
 }
 
-.pcs-ingredients-list li {
-    padding: 0.75rem 0;
-    border-bottom: 1px solid #f5f5f5;
+.pcs-ingredient-item {
+    padding: 1rem;
+    border-bottom: 1px solid #f8f9fa;
     line-height: 1.6;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.2s ease;
 }
 
-.pcs-ingredients-list li:last-child {
+.pcs-ingredient-item:hover {
+    background-color: #f8f9fa;
+}
+
+.pcs-ingredient-item:last-child {
     border-bottom: none;
 }
 
 .pcs-ingredient-amount {
+    font-weight: 700;
+    color: var(--pcs-primary-color);
+    min-width: 60px;
+    text-align: right;
+}
+
+.pcs-ingredient-unit {
     font-weight: 600;
+    color: #6c757d;
+    min-width: 80px;
+}
+
+.pcs-ingredient-name {
+    flex: 1;
+    color: #212529;
+}
+
+/* Enhanced Instructions */
+.pcs-instructions-list {
+    counter-reset: step-counter;
+    padding: 0;
+    margin: 0;
+}
+
+.pcs-instruction-step {
+    counter-increment: step-counter;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    position: relative;
+    line-height: 1.6;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.pcs-instruction-step::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: -15px;
+    top: 1rem;
+    background: var(--pcs-primary-color);
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.pcs-instruction-step:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+}
+
+/* Nutrition Facts */
+.pcs-recipe-nutrition {
+    margin-top: 2rem;
+}
+
+.pcs-nutrition-facts {
+    background: #fff;
+    border: 2px solid #212529;
+    border-radius: 8px;
+    max-width: 400px;
+    font-family: Arial, sans-serif;
+}
+
+.pcs-nutrition-header {
+    background: #212529;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 6px 6px 0 0;
+}
+
+.pcs-nutrition-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: block;
+}
+
+.pcs-nutrition-servings {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    display: block;
+    margin-top: 0.25rem;
+}
+
+.pcs-nutrition-content {
+    padding: 1rem;
+}
+
+.pcs-nutrition-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.pcs-nutrition-item:last-child {
+    border-bottom: none;
+}
+
+.pcs-nutrition-calories {
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-bottom: 2px solid #212529 !important;
+    margin-bottom: 0.5rem;
+}
+
+.pcs-nutrition-label {
+    font-weight: 600;
+    color: #212529;
+}
+
+.pcs-nutrition-value {
+    font-weight: 700;
     color: var(--pcs-primary-color);
 }
 
-/* Instructions */
+.pcs-nutrition-macros {
+    display: grid;
+    gap: 0.25rem;
+}
+
+/* Instructions (fallback) */
 .pcs-instructions-list ol {
     list-style: none;
     padding: 0;

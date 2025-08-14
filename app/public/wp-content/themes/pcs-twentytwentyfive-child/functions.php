@@ -213,6 +213,17 @@ function pcs_site_fixer_page() {
         }
         echo '</ul></div>';
     }
+ 
+    // Clear database-stored wp_template overrides for front-page and home
+    if (isset($_POST['clear_front_home_db'])) {
+        $results = pcs_clear_front_home_db_templates();
+        echo '<div class="notice notice-success"><p>Front/Home database templates processed:</p><ul>';
+        foreach ($results as $result) {
+            echo '<li>' . esc_html($result) . '</li>';
+        }
+        echo '</ul></div>';
+        echo '<div class="notice notice-info"><p>Hard refresh your homepage (/) to confirm the file-based front-page.html is now active.</p></div>';
+    }
     
     ?>
     <div class="wrap">
@@ -277,6 +288,12 @@ function pcs_site_fixer_page() {
         <p><strong>Force use of file-based header:</strong> Removes any database-stored header template parts that might be overriding your file-based header template.</p>
         <form method="post" action="">
             <input type="submit" name="clear_header_db" class="button-primary" value="Clear Database Headers" onclick="return confirm('This will delete any database-stored header templates and force WordPress to use your file-based header template. Continue?');" style="background-color: #d63638; border-color: #d63638;" />
+        </form>
+        
+        <h2>Clear Front/Home Database Templates</h2>
+        <p><strong>Force use of file-based front page:</strong> Deletes DB-stored <code>wp_template</code> overrides for <code>front-page</code> and <code>home</code> for this theme so that <code>templates/front-page.html</code> and <code>templates/home.html</code> from the child theme are used.</p>
+        <form method="post" action="">
+            <input type="submit" name="clear_front_home_db" class="button-primary" value="Clear Front/Home DB Templates" onclick="return confirm('This will permanently delete DB-stored block templates for front-page and home for the current theme. Continue?');" />
         </form>
         
         <h2>Current Status</h2>
@@ -344,3 +361,52 @@ function pcs_register_patterns() {
     }
 }
 add_action('init', 'pcs_register_patterns');
+ 
+/**
+ * Delete DB-stored block templates for front page and home (current theme only)
+ *
+ * @return string[] Messages describing actions taken
+ */
+function pcs_clear_front_home_db_templates() {
+    if (!function_exists('get_posts')) {
+        return array('WordPress functions unavailable.');
+    }
+
+    $theme_slug = get_stylesheet(); // current (child) theme slug
+    $slugs = array('front-page', 'home');
+    $messages = array();
+
+    foreach ($slugs as $slug) {
+        // Query DB-stored templates scoped to this theme via wp_theme taxonomy
+        $posts = get_posts(array(
+            'post_type'      => 'wp_template',
+            'posts_per_page' => -1,
+            'name'           => $slug,
+            'tax_query'      => array(
+                array(
+                    'taxonomy' => 'wp_theme',
+                    'field'    => 'name',
+                    'terms'    => $theme_slug,
+                )
+            ),
+            'post_status'    => array('publish', 'draft', 'auto-draft')
+        ));
+
+        if (!empty($posts)) {
+            foreach ($posts as $p) {
+                $id = $p->ID;
+                wp_delete_post($id, true); // force delete
+                $messages[] = sprintf("Deleted DB wp_template '%s' (ID %d) for theme '%s'", $slug, $id, $theme_slug);
+            }
+        } else {
+            $messages[] = sprintf("No DB wp_template found for '%s' (theme '%s')", $slug, $theme_slug);
+        }
+    }
+
+    // Nudge caches/rewrite rules
+    if (function_exists('flush_rewrite_rules')) {
+        flush_rewrite_rules(false);
+    }
+
+    return $messages;
+}

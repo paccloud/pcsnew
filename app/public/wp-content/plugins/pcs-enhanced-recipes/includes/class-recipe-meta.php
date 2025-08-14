@@ -152,7 +152,72 @@ class PCS_Recipe_Meta {
         </div>
         <?php
     }
-    
+
+    /**
+     * Render recipe ingredients meta box
+     */
+    public function render_recipe_ingredients_meta_box($post) {
+        // Add nonce for security
+        wp_nonce_field('pcs_recipe_ingredients_nonce', 'pcs_recipe_ingredients_nonce');
+
+        // Get current values
+        $ingredients = get_post_meta($post->ID, '_pcs_ingredients', true);
+        $structured_ingredients = get_post_meta($post->ID, '_pcs_structured_ingredients', true);
+
+        // Output fields
+        ?>
+        <div class="pcs-recipe-meta-box">
+            <div class="pcs-recipe-field">
+                <label for="pcs_ingredients"><?php _e('Ingredients', 'pcs-enhanced-recipes'); ?></label>
+                <textarea id="pcs_ingredients" name="pcs_ingredients" rows="10" cols="50" style="width: 100%;"><?php echo esc_textarea($ingredients); ?></textarea>
+                <p class="description"><?php _e('Enter each ingredient on a new line. Use format: "2 cups flour" or "1/2 teaspoon salt"', 'pcs-enhanced-recipes'); ?></p>
+            </div>
+
+            <div class="pcs-recipe-field" style="margin-top: 20px;">
+                <label><?php _e('Structured Ingredients (Auto-generated)', 'pcs-enhanced-recipes'); ?></label>
+                <div id="pcs-structured-ingredients-preview" style="background: #f9f9f9; padding: 10px; border: 1px solid #ddd; min-height: 100px;">
+                    <?php if ($structured_ingredients): ?>
+                        <pre><?php echo esc_html(json_encode($structured_ingredients, JSON_PRETTY_PRINT)); ?></pre>
+                    <?php else: ?>
+                        <em><?php _e('Save the recipe to see structured ingredients preview', 'pcs-enhanced-recipes'); ?></em>
+                    <?php endif; ?>
+                </div>
+                <p class="description"><?php _e('This shows how ingredients will be parsed for serving size calculations.', 'pcs-enhanced-recipes'); ?></p>
+            </div>
+        </div>
+
+        <script>
+        jQuery(document).ready(function($) {
+            $('#pcs_ingredients').on('input', function() {
+                // Could add real-time preview here in the future
+            });
+        });
+        </script>
+        <?php
+    }
+
+    /**
+     * Render recipe instructions meta box
+     */
+    public function render_recipe_instructions_meta_box($post) {
+        // Add nonce for security
+        wp_nonce_field('pcs_recipe_instructions_nonce', 'pcs_recipe_instructions_nonce');
+
+        // Get current values
+        $instructions = get_post_meta($post->ID, '_pcs_instructions', true);
+
+        // Output fields
+        ?>
+        <div class="pcs-recipe-meta-box">
+            <div class="pcs-recipe-field">
+                <label for="pcs_instructions"><?php _e('Instructions', 'pcs-enhanced-recipes'); ?></label>
+                <textarea id="pcs_instructions" name="pcs_instructions" rows="15" cols="50" style="width: 100%;"><?php echo esc_textarea($instructions); ?></textarea>
+                <p class="description"><?php _e('Enter each instruction step on a new line or separate with double line breaks.', 'pcs-enhanced-recipes'); ?></p>
+            </div>
+        </div>
+        <?php
+    }
+
     /**
      * Save meta box data
      */
@@ -232,5 +297,115 @@ class PCS_Recipe_Meta {
         if (isset($_POST['pcs_sugar'])) {
             update_post_meta($post_id, '_pcs_sugar', sanitize_text_field($_POST['pcs_sugar']));
         }
+
+        // Save ingredients and parse them into structured format
+        if (isset($_POST['pcs_ingredients'])) {
+            $ingredients = sanitize_textarea_field($_POST['pcs_ingredients']);
+            update_post_meta($post_id, '_pcs_ingredients', $ingredients);
+
+            // Parse ingredients into structured format
+            $structured_ingredients = $this->parse_ingredients($ingredients);
+            update_post_meta($post_id, '_pcs_structured_ingredients', $structured_ingredients);
+        }
+
+        // Save instructions
+        if (isset($_POST['pcs_instructions'])) {
+            update_post_meta($post_id, '_pcs_instructions', sanitize_textarea_field($_POST['pcs_instructions']));
+        }
+    }
+
+    /**
+     * Parse ingredients text into structured format for serving size calculations
+     */
+    private function parse_ingredients($ingredients_text) {
+        if (empty($ingredients_text)) {
+            return array();
+        }
+
+        $lines = explode("\n", $ingredients_text);
+        $structured = array();
+
+        foreach ($lines as $line) {
+            $line = trim($line);
+            if (empty($line)) {
+                continue;
+            }
+
+            $parsed = $this->parse_single_ingredient($line);
+            if ($parsed) {
+                $structured[] = $parsed;
+            }
+        }
+
+        return $structured;
+    }
+
+    /**
+     * Parse a single ingredient line
+     */
+    private function parse_single_ingredient($line) {
+        // Remove any leading dashes or bullets
+        $line = preg_replace('/^[-•*]\s*/', '', $line);
+
+        // Pattern to match: amount unit ingredient
+        // Examples: "2 cups flour", "1/2 teaspoon salt", "1 large egg"
+        $pattern = '/^(\d+(?:\/\d+)?(?:\.\d+)?|\d*\s*\d+\/\d+)\s*([a-zA-Z]+(?:\s+[a-zA-Z]+)*?)?\s+(.+)$/';
+
+        if (preg_match($pattern, $line, $matches)) {
+            $amount = trim($matches[1]);
+            $unit = isset($matches[2]) ? trim($matches[2]) : '';
+            $ingredient = trim($matches[3]);
+
+            // Convert fractions to decimals for calculations
+            $decimal_amount = $this->fraction_to_decimal($amount);
+
+            return array(
+                'original' => $line,
+                'amount' => $amount,
+                'amount_decimal' => $decimal_amount,
+                'unit' => $unit,
+                'ingredient' => $ingredient,
+                'scalable' => $decimal_amount !== null
+            );
+        }
+
+        // If no amount pattern found, treat as non-scalable ingredient
+        return array(
+            'original' => $line,
+            'amount' => '',
+            'amount_decimal' => null,
+            'unit' => '',
+            'ingredient' => $line,
+            'scalable' => false
+        );
+    }
+
+    /**
+     * Convert fraction strings to decimal numbers
+     */
+    private function fraction_to_decimal($fraction_str) {
+        $fraction_str = trim($fraction_str);
+
+        // Handle mixed numbers like "1 1/2"
+        if (preg_match('/^(\d+)\s+(\d+)\/(\d+)$/', $fraction_str, $matches)) {
+            $whole = intval($matches[1]);
+            $numerator = intval($matches[2]);
+            $denominator = intval($matches[3]);
+            return $whole + ($numerator / $denominator);
+        }
+
+        // Handle simple fractions like "1/2"
+        if (preg_match('/^(\d+)\/(\d+)$/', $fraction_str, $matches)) {
+            $numerator = intval($matches[1]);
+            $denominator = intval($matches[2]);
+            return $numerator / $denominator;
+        }
+
+        // Handle decimal numbers
+        if (is_numeric($fraction_str)) {
+            return floatval($fraction_str);
+        }
+
+        return null;
     }
 }
